@@ -2,27 +2,23 @@ import {
   View,
   Text,
   Image,
-  Pressable,
   StyleSheet,
-  FlatList,
   Animated,
-  Platform,
   useWindowDimensions,
-  Dimensions,
   SafeAreaView,
   ScrollView,
 } from "react-native";
-import { StackActions, useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import React, { memo } from "react";
+import React, {useState } from "react";
 import { menuItemProps } from "../types/types";
 import Colors from "../constants/Colors";
 import Card from "../ui/Card";
 import Indicator from "../ui/menu/Indicator";
 import Backdrop from "../ui/menu/Backdrop";
 import Accordion from "../components/Accordion";
-import { useAppSelector } from "../store/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../store/redux/hooks";
+import cartActions from "../store/redux/cart-slice";
 import Button from "../ui/Button";
 
 export default function ProductDetailScreen({
@@ -36,15 +32,44 @@ export default function ProductDetailScreen({
   navigation,
 }: menuItemProps) {
   const { width, height } = useWindowDimensions();
-  //retreiving items in the cart
-  const cartIds = useAppSelector((state) => state.cart.cartIds);
+  //defining local state to determine how many items that will be added to the cart
+  const [tally, setTally] = useState<number>(0);
+  const dispatch = useAppDispatch();
+
   //retrieving selected product
   const selectedProduct = route.params.product;
   const productData = [selectedProduct];
   //dispatching actions to pop the detail screen
 
   function pressHandler() {
-    navigation.replace("menuSL");
+    navigation.replace("Menu");
+  }
+
+  function AddToCart() {
+    //dispatching action to update cart data in the store
+    if (tally > 1) {
+      for (let i = 0; i < tally; i++) {
+        dispatch(
+          cartActions.addItem({
+            item: { title, price, id, imageUri, isFavorite, description },
+          })
+        );
+      }
+    } else {
+      dispatch(
+        cartActions.addItem({
+          item: { title, price, id, imageUri, isFavorite, description },
+        })
+      );
+    }
+  }
+
+  function updateTally(mode: string) {
+    if (mode === "add") {
+      setTally((prevTally) => prevTally + 1);
+    } else {
+      setTally((prevTally) => prevTally - 1);
+    }
   }
 
   const scrollX = React.useRef(new Animated.Value(0)).current;
@@ -129,20 +154,20 @@ export default function ProductDetailScreen({
                 name="minus"
                 size={28}
                 color={Colors.primary100}
-                onPress={pressHandler}
+                onPress={updateTally.bind(null, "minus")}
               />
             </View>
-            <Text style={styles.tally}>{cartIds.length}</Text>
+            <Text style={styles.tally}>{tally}</Text>
             <View style={styles.actionButton}>
               <Ionicons
                 name="add"
                 size={28}
                 color={Colors.primary800}
-                onPress={pressHandler}
+                onPress={updateTally.bind(null, "add")}
               />
             </View>
           </View>
-          <View style={{ marginHorizontal: 28, marginVertical: 16}}>
+          <View style={{ marginHorizontal: 28, marginVertical: 16 }}>
             <Button
               fontSize={16}
               buttonBackgroundColor={Colors.secondary100}
@@ -156,6 +181,7 @@ export default function ProductDetailScreen({
             <Button
               fontSize={16}
               isTransparent
+              onPress={AddToCart}
               paddingHorizontal={24}
               color={Colors.secondary100}
               paddingVertical={8}

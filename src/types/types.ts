@@ -30,3 +30,12 @@ export type ProductInfo = Record<
   | "Extra",
   string
 >;
+
+export type CartItem = {
+  id: string;
+  amount: number;
+  price: number;
+  imageUri: any;
+  title: string;
+  quantity: number;
+}

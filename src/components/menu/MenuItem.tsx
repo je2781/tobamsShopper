@@ -14,6 +14,8 @@ import React, { memo } from "react";
 import { menuItemProps } from "../../types/types";
 import Colors from "../../constants/Colors";
 import Button from "../../ui/Button";
+import { useAppDispatch } from "../../store/redux/hooks";
+import cartActions from "../../store/redux/cart-slice";
 
 //using memo to prevent reredending of menu item when you scroll through the list
 const MenuItem = memo(function MenuItem({
@@ -23,16 +25,28 @@ const MenuItem = memo(function MenuItem({
   isFavorite,
   id,
   info,
-  description
+  description,
 }: menuItemProps) {
   const { width } = useWindowDimensions();
+  //dispatching action to toggle screen to Cart screen
+  const dispatch = useAppDispatch();
   //dispatching action to toggle screen to detail screen
   const navigation = useNavigation();
 
   function pressHandler() {
     navigation.dispatch(
       StackActions.push("detail", {
-        product: {title, price, id, imageUri, isFavorite, description, info}
+        product: { title, price, id, imageUri, isFavorite, description, info },
+      })
+    );
+  }
+
+  function AddToCart() {
+    //dispatching action to update cart data in the store
+
+    dispatch(
+      cartActions.addItem({
+        item: { title, price, id, imageUri, isFavorite, description },
       })
     );
   }
@@ -60,8 +74,20 @@ const MenuItem = memo(function MenuItem({
                 marginVertical: 2,
               }}
             >
-              <Text style={[styles.title, width < 560 ? {flexGrow: 1} : {flexShrink: 1}]}>{title}</Text>
-              <Text style={[styles.price, width > 560 ? {flexGrow: 1} : {flexShrink: 1}]}>{`£${price}`}</Text>
+              <Text
+                style={[
+                  styles.title,
+                  width < 560 ? { flexGrow: 1 } : { flexShrink: 1 },
+                ]}
+              >
+                {title}
+              </Text>
+              <Text
+                style={[
+                  styles.price,
+                  width > 560 ? { flexGrow: 1 } : { flexShrink: 1 },
+                ]}
+              >{`£${price}`}</Text>
             </View>
             <Button
               hasLeftExternalIcon
@@ -71,6 +97,7 @@ const MenuItem = memo(function MenuItem({
               color="white"
               paddingVertical={8}
               borderRadius={24}
+              onPress={AddToCart}
               leftExternalIcon={
                 <MaterialCommunityIcons
                   name="shopping-outline"
@@ -111,7 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     marginRight: 8,
-    marginTop: 8
+    marginTop: 8,
   },
   title: {
     fontWeight: "bold",

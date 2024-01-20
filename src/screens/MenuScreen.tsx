@@ -12,20 +12,22 @@ const Stack = createNativeStackNavigator();
 export default function MenuScreen() {
   return (
     <Stack.Navigator
-    
       screenOptions={{
         contentStyle: {
-          backgroundColor: Colors.primary50
+          backgroundColor: Colors.primary50,
         },
-        headerShown: false
       }}
     >
+      <Stack.Screen name="Menu" component={MenuSearchAndList} options={{
+        headerTitleAlign: "center"
+      }}/>
       <Stack.Screen
-        name="menuSL"
-        component={MenuSearchAndList}
+        name="detail"
+        component={ProductDetailScreen}
+        options={{
+          headerShown: false,
+        }}
       />
-      <Stack.Screen name="detail" component={ProductDetailScreen} />
     </Stack.Navigator>
   );
 }
-

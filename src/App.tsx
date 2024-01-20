@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   StatusBar,
   useColorScheme,
+  View,
 } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
@@ -65,7 +66,7 @@ function Root() {
         />
 
         <Tab.Screen
-          name="Menu"
+          name="Shop"
           component={MenuScreen}
           options={{
             tabBarIcon: ({ focused, color }) => (
@@ -75,12 +76,13 @@ function Root() {
                 color={focused ? AppColors.secondary100 : AppColors.primary200}
               />
             ),
+            headerShown: false,
           }}
         />
         <Tab.Screen
           name="Cart"
           component={CartScreen}
-          options={{
+          options={({ navigation: { goBack } }) => ({
             tabBarIcon: ({ focused, color }) => (
               <MaterialCoumminityIcons
                 name="shopping-outline"
@@ -88,7 +90,17 @@ function Root() {
                 color={focused ? AppColors.secondary100 : AppColors.primary200}
               />
             ),
-          }}
+            headerLeft: () => (
+              <View style={styles.actionButton}>
+                <Ionicons
+                  name="chevron-back"
+                  size={24}
+                  color={Colors.primary800}
+                  onPress={() => goBack()}
+                />
+              </View>
+            ),
+          })}
         />
         <Tab.Screen
           name="Account"
@@ -134,5 +146,19 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     backgroundColor: AppColors.primary50,
+  },
+  actionButton: {
+    marginHorizontal: 28,
+    marginVertical: 6,
+    padding: 12,
+    borderRadius: 12,
+    elevation: 6,
+    backgroundColor: "#fff",
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    shadowOpacity: 0.3,
+    alignItems: "center",
+    maxWidth: "60%",
   },
 });

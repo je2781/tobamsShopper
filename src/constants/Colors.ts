@@ -3,7 +3,8 @@ const AppColors = {
     primary100: '#E1E5E9',
     primary200: '#858585',
     primary300: '#4A4A4A',
-    primary800: '#151515',
+    primary700: '#151515',
+    primary800: '#131313',
     primary900: '#000000',
     secondary100: '#DB3C25',
 

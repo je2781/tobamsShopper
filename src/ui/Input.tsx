@@ -34,7 +34,7 @@ const Input = forwardRef<TextInput, InputProps>((
       <View
         style={[styles.prefixIconContainer, props.isInvalid && styles.inputInvalid]}
       >
-        <MaterialIcons name={props.icon} size={19} color={Colors.primary800} />
+        <MaterialIcons name={props.icon} size={19} color={Colors.primary700} />
       </View>
       <TextInput
         style={[
@@ -66,7 +66,7 @@ const Input = forwardRef<TextInput, InputProps>((
           <FontAwesome
             name={props.suffixIcon}
             size={19}
-            color={Colors.primary800}
+            color={Colors.primary700}
             onPress={() => setIsSecure((currentValue) => !currentValue)}
           />
         </View>

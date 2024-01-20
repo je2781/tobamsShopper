@@ -1,5 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View, Image } from "react-native";
+import Colors from "../constants/Colors";
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -100,8 +101,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   buttonTransparent: {
-    borderColor: "white",
-    borderWidth: 2,
+    borderColor: Colors.secondary100,
+    borderWidth: 1,
   },
   pressed: {
     opacity: 0.75,

@@ -7,7 +7,7 @@ import {
   Platform,
   useWindowDimensions,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { StackActions, useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import React, { memo } from "react";
@@ -22,12 +22,20 @@ const MenuItem = memo(function MenuItem({
   price,
   isFavorite,
   id,
+  info,
+  description
 }: menuItemProps) {
   const { width } = useWindowDimensions();
-
+  //dispatching action to toggle screen to detail screen
   const navigation = useNavigation();
 
-  function pressHandler() {}
+  function pressHandler() {
+    navigation.dispatch(
+      StackActions.push("detail", {
+        product: {title, price, id, imageUri, isFavorite, description, info}
+      })
+    );
+  }
 
   return (
     <View style={styles.menuItem}>
@@ -52,8 +60,8 @@ const MenuItem = memo(function MenuItem({
                 marginVertical: 2,
               }}
             >
-              <Text style={[styles.title, {flexGrow: 1}]}>{title}</Text>
-              <Text style={[styles.price, width > 560 && {flexShrink: 1}]}>{`£${price}`}</Text>
+              <Text style={[styles.title, width < 560 ? {flexGrow: 1} : {flexShrink: 1}]}>{title}</Text>
+              <Text style={[styles.price, width > 560 ? {flexGrow: 1} : {flexShrink: 1}]}>{`£${price}`}</Text>
             </View>
             <Button
               hasLeftExternalIcon
@@ -87,7 +95,6 @@ const styles = StyleSheet.create({
   menuItem: {
     backgroundColor: "white",
     borderRadius: 12,
-    width: "auto",
     flex: 1,
     margin: 12,
     padding: 10,

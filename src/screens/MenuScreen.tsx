@@ -3,33 +3,29 @@ import Input from "../ui/Input";
 import Colors from "../constants/Colors";
 import { FlatList, StyleSheet, View } from "react-native";
 import MenuList from "../components/menu/MenuList";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ProductDetailScreen from "./ProductDetailScreen";
+import MenuSearchAndList from "../components/menu/MenuSearchAndList";
 
+const Stack = createNativeStackNavigator();
+//setting up stack navigator to push the detail screen onto the menu screen
 export default function MenuScreen() {
-  const [enteredQuery, setEnteredQuery] = useState<string>("");
-
-  function updateInputValueHandler(enteredValue: string) {
-    setEnteredQuery(enteredValue);
-  }
-
   return (
-    <View style={styles.container}>
-      <Input
-        onUpdateValue={updateInputValueHandler}
-        value={enteredQuery}
-        testID="searchbar"
-        icon="search"
-        placeholder="Search"
-        placeholderColor={Colors.primary200}
+    <Stack.Navigator
+    
+      screenOptions={{
+        contentStyle: {
+          backgroundColor: Colors.primary50
+        },
+        headerShown: false
+      }}
+    >
+      <Stack.Screen
+        name="menuSL"
+        component={MenuSearchAndList}
       />
-      <MenuList />
-    </View>
+      <Stack.Screen name="detail" component={ProductDetailScreen} />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingHorizontal: 24,
-      paddingVertical: 18
-    },
-  });

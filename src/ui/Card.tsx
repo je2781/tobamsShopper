@@ -12,7 +12,6 @@ export default function Card({ children }: cardProps) {
       style={[
         styles.inputContainer,
         {
-          maxWidth: width < 460 ? "100%" : "68%",
           marginBottom: width < 460 ? 20 : 36,
         },
       ]}
@@ -24,8 +23,9 @@ export default function Card({ children }: cardProps) {
 
 const styles = StyleSheet.create({
   inputContainer: {
+    marginVertical: 18,
     marginHorizontal: 8,
-    padding: 16,
+    padding: 24,
     borderRadius: 8,
     elevation: 6,
     backgroundColor: "#fff",
@@ -34,5 +34,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOpacity: 0.3,
     alignItems: "center",
+    maxHeight: '90%',
+    maxWidth: '85%'
   },
 });

@@ -16,10 +16,16 @@ import AccountsScreen from "./screens/AccountsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AppColors from "./constants/Colors";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import ProductDetailScreen from "./screens/ProductDetailScreen";
+import { useAppSelector } from "./store/redux/hooks";
+import { Provider } from "react-redux";
+import store from "./store/redux/index";
 
 const Tab = createBottomTabNavigator();
 
 function Root() {
+  //reaching the store to see the position of the detail screen on the stack
+  const general = useAppSelector((state) => state.general);
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -27,11 +33,11 @@ function Root() {
           backgroundColor: AppColors.primary50,
         }}
         screenOptions={{
-          headerTintColor: AppColors.primary800,
+          headerTintColor: AppColors.primary700,
           tabBarActiveTintColor: AppColors.secondary100,
           tabBarInactiveTintColor: AppColors.primary200,
           headerStyle: {
-            backgroundColor: AppColors.primary50
+            backgroundColor: AppColors.primary50,
           },
           headerTitleAlign: "center",
           tabBarStyle: {
@@ -57,6 +63,7 @@ function Root() {
             ),
           }}
         />
+
         <Tab.Screen
           name="Menu"
           component={MenuScreen}
@@ -110,11 +117,13 @@ function App() {
 
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <Root />
       <StatusBar
         barStyle={isDarkMode ? "light-content" : "dark-content"}
         backgroundColor={AppColors.primary50}
       />
+      <Provider store={store}>
+        <Root />
+      </Provider>
     </SafeAreaView>
   );
 }

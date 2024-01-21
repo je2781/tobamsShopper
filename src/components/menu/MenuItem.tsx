@@ -6,11 +6,12 @@ import {
   StyleSheet,
   Platform,
   useWindowDimensions,
+  Alert,
 } from "react-native";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import React, { memo, useState } from "react";
+import React, { memo, useMemo, useState } from "react";
 import { menuItemProps } from "../../types/types";
 import Colors from "../../constants/Colors";
 import Button from "../../ui/Button";
@@ -37,14 +38,13 @@ const MenuItem = memo(function MenuItem({
 
     navigation.dispatch(
       StackActions.push("detail", {
-        product: { title, price, id, imageUri, description, info }
+        product: { title, price, id, imageUri, description, info },
       })
     );
   }
 
   function AddToCart() {
     //dispatching action to update cart data in the store
-
     dispatch(
       cartActions.addItem({
         item: { title, price, id, imageUri, quantity: 1 },

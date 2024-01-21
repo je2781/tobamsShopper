@@ -22,7 +22,7 @@ export default function CartItemComponent({
 
   function checkOut() {}
 
-  function UpdateCart(mode: string) {
+  function UpdateCart(mode: string, itemQuantity: number) {
     //dispatching action to update cart data in the store
     switch (mode) {
       case "add":
@@ -36,6 +36,7 @@ export default function CartItemComponent({
               amount: tally * price!,
               quantity: tally,
             },
+            quantity: itemQuantity
           })
         );
         break;
@@ -52,6 +53,8 @@ export default function CartItemComponent({
               amount: tally * price!,
               quantity: tally,
             },
+            quantity: itemQuantity
+
           })
         );
 
@@ -62,12 +65,10 @@ export default function CartItemComponent({
   function updateTally(mode: string) {
     if (mode === "minus" && tally > 0) {
       setTally((prevTally) => prevTally - 1);
-      UpdateCart(mode);
-    } else if (mode === "minus" && tally <= 1) {
-      dispatch(cartActions.reset({}));
-    } else {
+      UpdateCart(mode, tally);
+    } else if (mode === "add" && tally > 0) {
       setTally((prevTally) => prevTally + 1);
-      UpdateCart(mode);
+      UpdateCart(mode, tally);
     }
   }
   return (

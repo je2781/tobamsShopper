@@ -25,6 +25,7 @@ export const cartSlice = createSlice({
         const updatedCartItem = {
           ...existingCartItem,
           amount: existingCartItem.amount + action.payload.item.price,
+          quantity: existingCartItem.quantity + action.payload.quantity
         };
         //updating item
         state.cartItems[existingCartItemIndex] = updatedCartItem;
@@ -40,12 +41,14 @@ export const cartSlice = createSlice({
       //updating the amount of the total items added
       state.totalAmount = state.totalAmount - action.payload.item.price;
 
-      if (existingCartItem.amount === 0 ) {
-        state.cartItems.slice(state.cartItems.indexOf(existingCartItem), 1);
+
+      if (existingCartItem.quantity === 1) {
+        state.cartItems.splice(state.cartItems.indexOf(existingCartItem), 1);
       }else {
         const updatedCartItem = {
           ...existingCartItem,
           amount: existingCartItem.amount - action.payload.item.price,
+          quantity: existingCartItem.quantity - action.payload.quantity
         };
         //updating item
         state.cartItems[existingCartItemIndex] = updatedCartItem;

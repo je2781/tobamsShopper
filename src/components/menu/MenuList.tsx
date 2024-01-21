@@ -34,7 +34,7 @@ export default function MenuList() {
         contentContainerStyle={{
           justifyContent: "space-between",
         }}
-        numColumns={width < 450 ? 1 : width > 560 ? 3 : 2}
+        numColumns={width < 450 ? 1 : 3}
       />
     </View>
   );

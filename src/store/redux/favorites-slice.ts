@@ -16,7 +16,7 @@ export const favoritesSlice = createSlice({
       state.favoriteMenuIds.push(action.payload);
     },
     removeFavorite(state, action) {
-      state.favoriteMenuIds.slice(state.favoriteMenuIds.indexOf(action.payload), 1);
+      state.favoriteMenuIds.splice(state.favoriteMenuIds.indexOf(action.payload), 1);
     },
   },
 });

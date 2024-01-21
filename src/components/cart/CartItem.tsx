@@ -18,7 +18,6 @@ const CartItemComponent = memo( function CartItemComponent({
   //defining local state to determine how many items that will be added to the cart
   const [tally, setTally] = useState<number>(quantity);
   const dispatch = useAppDispatch();
-  const cartData = useAppSelector((state) => state.cart);
 
   function checkOut() {}
 
@@ -75,7 +74,7 @@ const CartItemComponent = memo( function CartItemComponent({
         marginVertical: 16,
       }}
     >
-      <View style={{ flexDirection: "row", flexShrink: 1, gap: 12 }}>
+      <View style={{ flexDirection: "row", flexShrink: 1, gap: 10 }}>
         <Image source={imageUri} style={styles.image} />
         <View style={{ gap: 26, flexGrow: 1 }}>
           <Text style={styles.title}>{title}</Text>
@@ -109,7 +108,7 @@ const CartItemComponent = memo( function CartItemComponent({
 export default CartItemComponent
 
 const styles = StyleSheet.create({
-  image: { width: "35%", height: 150 },
+  image: { width: "35%", height: 160 },
   title: {
     fontWeight: "bold",
     fontSize: 16,

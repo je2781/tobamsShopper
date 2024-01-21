@@ -10,7 +10,7 @@ const initialState: initialStateProps = {
 };
 
 export const productSlice = createSlice({
-  name: "detail",
+  name: "product",
   initialState: initialState,
   reducers: {
     saveProduct(state, action) {

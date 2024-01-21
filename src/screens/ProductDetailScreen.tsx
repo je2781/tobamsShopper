@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { menuItemProps } from "../types/types";
 import Colors from "../constants/Colors";
 import Card from "../ui/Card";
@@ -20,6 +20,7 @@ import Accordion from "../components/Accordion";
 import { useAppDispatch, useAppSelector } from "../store/redux/hooks";
 import cartActions from "../store/redux/cart-slice";
 import Button from "../ui/Button";
+import generalActions from "../store/redux/product-slice";
 
 export default function ProductDetailScreen({
   title,
@@ -32,11 +33,30 @@ export default function ProductDetailScreen({
   const { width, height } = useWindowDimensions();
   //defining local state to determine how many items that will be added to the cart
   const [tally, setTally] = useState<number>(0);
+
   const dispatch = useAppDispatch();
 
-  //retrieving selected product
+  // checking store for product data update
+  const product = useAppSelector((state) => state.product.selectedProduct);
+
+  //retrieving product data from previous screen
   const selectedProduct = route.params.product;
   const productData = [selectedProduct];
+
+  //saving product data from previous screen in store
+  useEffect(() => {
+    dispatch(
+      generalActions.saveProduct({
+        product: {
+          title: selectedProduct.title,
+          price: selectedProduct.price,
+          id: selectedProduct.id,
+          imageUri: selectedProduct.imageUri,
+        },
+      })
+    );
+  }, []);
+
   //dispatching actions to pop the detail screen
 
   function pressHandler() {
@@ -44,19 +64,19 @@ export default function ProductDetailScreen({
   }
 
   function AddToCart() {
-    // //dispatching action to update cart data in the store
+    //dispatching action to update cart data in the store
 
-    // dispatch(
-    //   cartActions.addItem({
-    //     item: {
-    //       title,
-    //       price,
-    //       id,
-    //       imageUri,
-    //       quantity: tally,
-    //     },
-    //   })
-    // );
+    dispatch(
+      cartActions.addItem({
+        item: {
+          title: product.title!,
+          price: product.price!,
+          id:  product.id!,
+          imageUri: product.imageUri!,
+          quantity: tally,
+        },
+      })
+    );
   }
 
   function updateTally(mode: string) {

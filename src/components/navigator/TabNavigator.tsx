@@ -9,7 +9,7 @@ import MenuScreen from "../../screens/MenuScreen";
 import CartScreen from "../../screens/CartScreen";
 import AccountsScreen from "../../screens/AccountsScreen";
 
-//setting up stack navigator
+//setting up bottom tab navigator
 const Tab = createBottomTabNavigator();
 
 // coverting the tab navigator into a component in order to nest it

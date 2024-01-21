@@ -20,7 +20,7 @@ import Accordion from "../components/Accordion";
 import { useAppDispatch, useAppSelector } from "../store/redux/hooks";
 import cartActions from "../store/redux/cart-slice";
 import Button from "../ui/Button";
-import generalActions from "../store/redux/product-slice";
+import productActions from "../store/redux/product-slice";
 
 export default function ProductDetailScreen({
   title,
@@ -46,7 +46,7 @@ export default function ProductDetailScreen({
   //saving product data from previous screen in store
   useEffect(() => {
     dispatch(
-      generalActions.saveProduct({
+      productActions.saveProduct({
         product: {
           title: selectedProduct.title,
           price: selectedProduct.price,

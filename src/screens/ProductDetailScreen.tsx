@@ -44,7 +44,7 @@ export default function ProductDetailScreen({
   }
 
   function AddToCart() {
-    //dispatching action to update cart data in the store
+    // //dispatching action to update cart data in the store
 
     // dispatch(
     //   cartActions.addItem({
@@ -53,7 +53,6 @@ export default function ProductDetailScreen({
     //       price,
     //       id,
     //       imageUri,
-    //       amount: tally * price!,
     //       quantity: tally,
     //     },
     //   })

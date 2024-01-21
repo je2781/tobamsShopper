@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { CartItem } from "../../types/types";
 import Colors from "../../constants/Colors";
@@ -7,7 +7,8 @@ import cartActions from "../../store/redux/cart-slice";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-export default function CartItemComponent({
+//using memo to prevent reredending of menu item when you scroll through the list
+const CartItemComponent = memo( function CartItemComponent({
   imageUri,
   title,
   price,
@@ -103,7 +104,9 @@ export default function CartItemComponent({
       </View>
     </View>
   );
-}
+});
+
+export default CartItemComponent
 
 const styles = StyleSheet.create({
   image: { width: "35%", height: 150 },

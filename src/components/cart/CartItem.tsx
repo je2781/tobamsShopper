@@ -32,7 +32,7 @@ export default function CartItemComponent({
               price,
               id,
               imageUri,
-              quantity: tally,
+              quantity: 1,
             }
           })
         );
@@ -47,7 +47,7 @@ export default function CartItemComponent({
               price,
               id,
               imageUri,
-              quantity: tally,
+              quantity: 1,
             },
 
           })

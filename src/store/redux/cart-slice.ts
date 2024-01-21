@@ -14,7 +14,7 @@ export const cartSlice = createSlice({
     addItem(state, action) {
 
         //updating the amount of the total items added, and number of items
-      state.totalAmount = state.totalAmount + action.payload.item.price;
+      state.totalAmount = state.totalAmount + (action.payload.item.price * action.payload.item.quantity);
 
       const existingCartItemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.item.id
@@ -38,7 +38,7 @@ export const cartSlice = createSlice({
       );
       const existingCartItem: CartItem = state.cartItems[existingCartItemIndex];
       //updating the amount of the total items added
-      state.totalAmount = state.totalAmount - action.payload.item.price;
+      state.totalAmount = state.totalAmount - (action.payload.item.price * action.payload.item.quantity);
 
 
       if (existingCartItem.quantity === 1) {

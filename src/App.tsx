@@ -21,7 +21,7 @@ import ProductDetailScreen from "./screens/ProductDetailScreen";
 import { useAppSelector } from "./store/redux/hooks";
 import { Provider } from "react-redux";
 import store from "./store/redux/index";
-import TabNavigator from "./components/TabNavigator";
+import TabNavigator from "./components/navigator/TabNavigator";
 
 //setting up stack navigator to nest the bottom tab
 const Stack = createNativeStackNavigator();

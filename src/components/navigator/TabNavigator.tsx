@@ -1,13 +1,13 @@
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCoumminityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import HomeScreen from "../screens/HomeScreen";
-import MenuScreen from "../screens/MenuScreen";
-import CartScreen from "../screens/CartScreen";
-import AccountsScreen from "../screens/AccountsScreen";
+import HomeScreen from "../../screens/HomeScreen";
+import MenuScreen from "../../screens/MenuScreen";
+import CartScreen from "../../screens/CartScreen";
+import AccountsScreen from "../../screens/AccountsScreen";
 
 //setting up stack navigator
 const Tab = createBottomTabNavigator();

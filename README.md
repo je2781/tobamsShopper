@@ -14,7 +14,7 @@ I started with designing the model for the dummy data, and other types/interface
 
 ## How to run the app
 
-From the main directory, run (npm run android) for android, and (npm run ios) for ios.
+From the main directory, run (npm start) to start metro, then toggle (a) to run android, and toggle (i) to run on ios.
 
 
 

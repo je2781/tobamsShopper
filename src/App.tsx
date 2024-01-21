@@ -21,14 +21,16 @@ import ProductDetailScreen from "./screens/ProductDetailScreen";
 import { useAppSelector } from "./store/redux/hooks";
 import { Provider } from "react-redux";
 import store from "./store/redux/index";
+import { CartItem } from "./types/types";
 
 const Tab = createBottomTabNavigator();
+//setting up stack navigator to push the detail screen onto the menu screen
+const Stack = createNativeStackNavigator();
 
 function Root() {
-  //reaching the store to see the position of the detail screen on the stack
-  const general = useAppSelector((state) => state.general);
-  return (
-    <NavigationContainer>
+
+  function TabNavigator() {
+    return (
       <Tab.Navigator
         sceneContainerStyle={{
           backgroundColor: AppColors.primary50,
@@ -66,7 +68,7 @@ function Root() {
         />
 
         <Tab.Screen
-          name="Shop"
+          name="Menu"
           component={MenuScreen}
           options={{
             tabBarIcon: ({ focused, color }) => (
@@ -76,7 +78,6 @@ function Root() {
                 color={focused ? AppColors.secondary100 : AppColors.primary200}
               />
             ),
-            headerShown: false,
           }}
         />
         <Tab.Screen
@@ -90,6 +91,7 @@ function Root() {
                 color={focused ? AppColors.secondary100 : AppColors.primary200}
               />
             ),
+            
             headerLeft: () => (
               <View style={styles.actionButton}>
                 <Ionicons
@@ -101,7 +103,8 @@ function Root() {
               </View>
             ),
           })}
-        />
+        >
+        </Tab.Screen>
         <Tab.Screen
           name="Account"
           component={AccountsScreen}
@@ -116,6 +119,32 @@ function Root() {
           }}
         />
       </Tab.Navigator>
+    );
+  }
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          contentStyle: {
+            backgroundColor: Colors.primary50,
+          },
+        }}
+      >
+        <Stack.Screen
+        component={TabNavigator}
+          name="HomeScreen"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="detail"
+          component={ProductDetailScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

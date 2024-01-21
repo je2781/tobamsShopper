@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { menuItemProps } from "../types/types";
 import Colors from "../constants/Colors";
 import Card from "../ui/Card";
@@ -25,9 +25,7 @@ export default function ProductDetailScreen({
   title,
   imageUri,
   price,
-  isFavorite,
   id,
-  description,
   route,
   navigation,
 }: menuItemProps) {
@@ -42,26 +40,24 @@ export default function ProductDetailScreen({
   //dispatching actions to pop the detail screen
 
   function pressHandler() {
-    navigation.replace("Menu");
+    navigation.navigate("HomeScreen");
   }
 
   function AddToCart() {
     //dispatching action to update cart data in the store
-    if (tally > 1) {
-      for (let i = 0; i < tally; i++) {
-        dispatch(
-          cartActions.addItem({
-            item: { title, price, id, imageUri, isFavorite, description },
-          })
-        );
-      }
-    } else {
-      dispatch(
-        cartActions.addItem({
-          item: { title, price, id, imageUri, isFavorite, description },
-        })
-      );
-    }
+
+    dispatch(
+      cartActions.addItem({
+        item: {
+          title,
+          price,
+          id,
+          imageUri,
+          amount: tally * price!,
+          quantity: tally,
+        },
+      })
+    );
   }
 
   function updateTally(mode: string) {
@@ -136,7 +132,7 @@ export default function ProductDetailScreen({
             </View>
             {Object.keys(selectedProduct.info).map((title, i) => (
               <Accordion
-                key={i}
+                key={title}
                 title={title}
                 content={selectedProduct.info[title]}
               />
@@ -173,6 +169,7 @@ export default function ProductDetailScreen({
               buttonBackgroundColor={Colors.secondary100}
               paddingHorizontal={24}
               color="white"
+              onPress={AddToCart}
               paddingVertical={8}
               borderRadius={24}
             >
@@ -181,7 +178,6 @@ export default function ProductDetailScreen({
             <Button
               fontSize={16}
               isTransparent
-              onPress={AddToCart}
               paddingHorizontal={24}
               color={Colors.secondary100}
               paddingVertical={8}

@@ -39,3 +39,8 @@ export type CartItem = {
   title: string;
   quantity: number;
 }
+
+export interface initialStateProps {
+  cartItems: CartItem[];
+  totalAmount: number;
+}

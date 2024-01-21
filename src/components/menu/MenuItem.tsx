@@ -46,7 +46,7 @@ const MenuItem = memo(function MenuItem({
 
     dispatch(
       cartActions.addItem({
-        item: { title, price, id, imageUri, isFavorite, description },
+        item: { title, price, id, imageUri, amount: price },
       })
     );
   }

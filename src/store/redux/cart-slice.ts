@@ -1,16 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CartItem } from "../../types/types";
+import { CartItem, initialStateProps } from "../../types/types";
 
-interface initialStateProps {
-  cartItems: CartItem[];
-  totalAmount: number;
-  quantity: number;
-}
 
 const initialState: initialStateProps = {
   cartItems: [],
   totalAmount: 0,
-  quantity: 0
 };
 
 export const cartSlice = createSlice({
@@ -21,7 +15,6 @@ export const cartSlice = createSlice({
 
         //updating the amount of the total items added, and number of items
       state.totalAmount = state.totalAmount + action.payload.item.price;
-      state.quantity += 1;
 
       const existingCartItemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.item.id
@@ -33,10 +26,8 @@ export const cartSlice = createSlice({
           ...existingCartItem,
           amount: existingCartItem.amount + action.payload.item.price,
         };
-        //removing old item with outdated amount from the list
-        state.cartItems.slice(state.cartItems.indexOf(existingCartItem), 1);
-        //adding new item with current amount
-        state.cartItems.push(updatedCartItem);
+        //updating item
+        state.cartItems[existingCartItemIndex] = updatedCartItem;
       } else {
         state.cartItems.push(action.payload.item);
       }
@@ -48,21 +39,22 @@ export const cartSlice = createSlice({
       const existingCartItem: CartItem = state.cartItems[existingCartItemIndex];
       //updating the amount of the total items added
       state.totalAmount = state.totalAmount - action.payload.item.price;
-      state.quantity -= 1;
 
-      if (existingCartItem.amount === 1) {
+      if (existingCartItem.amount === 0 ) {
         state.cartItems.slice(state.cartItems.indexOf(existingCartItem), 1);
-      } else {
+      }else {
         const updatedCartItem = {
           ...existingCartItem,
           amount: existingCartItem.amount - action.payload.item.price,
         };
-        //removing old item with outdated amount from the list
-        state.cartItems.slice(state.cartItems.indexOf(existingCartItem), 1);
-        //adding new item with current amount
-        state.cartItems.push(updatedCartItem);
+        //updating item
+        state.cartItems[existingCartItemIndex] = updatedCartItem;
       }
     },
+    reset(state, action){
+      state.totalAmount  = 0;
+      state.cartItems.splice(0,state.cartItems.length);
+    }
   },
 });
 

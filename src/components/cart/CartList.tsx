@@ -1,13 +1,17 @@
 import React, { memo } from "react";
 import { FlatList, Text, useWindowDimensions } from "react-native";
 import { displayedItems } from "../../data/dummy_data";
-import { CartItem, menuItemProps } from "../../types/types";
+import { CartItem, initialStateProps, menuItemProps } from "../../types/types";
 import { View } from "react-native";
 import { useAppSelector } from "../../store/redux/hooks";
 import CartItemComponent from "./CartItem";
 import Colors from "../../constants/Colors";
 
-export default function CartList({ cartData }: any) {
+interface cartListProps{
+    cartItems: CartItem[],
+}
+
+export default function CartList({cartItems }: cartListProps) {
   //preparing cart data to pass into cart item component
   function renderCartItem(itemData: any) {
     const item = itemData.item;
@@ -15,18 +19,18 @@ export default function CartList({ cartData }: any) {
     const CartItemProps = {
       imageUri: item.imageUri,
       title: item.title,
-      quantity: cartData.quantity,
       price: item.price,
-      amount: cartData.totalAmount,
+      amount: item.amount,
+      quantity: item.quantity,
       id: item.id,
     };
 
-    return <CartItemComponent {...CartItemProps} />;
+    return <CartItemComponent {...CartItemProps} key={item.id}/>;
   }
 
   return (
     <View style={{ flex: 1, marginVertical: 8 }}>
-      {cartData.cartItems.length === 0 ? (
+      {cartItems.length === 0 ? (
         <View style={{ alignItems: "center", justifyContent: "center", marginTop: 24}}>
           <Text style={{ color: Colors.primary700, fontSize: 18, position: 'absolute', bottom: -200}}>
             Cart Is Empty!
@@ -34,7 +38,7 @@ export default function CartList({ cartData }: any) {
         </View>
       ) : (
         <FlatList
-          data={cartData.cartItems}
+          data={cartItems}
           keyExtractor={(item) => item.id}
           renderItem={renderCartItem}
           contentContainerStyle={{

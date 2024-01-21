@@ -5,13 +5,15 @@ import Colors from "../constants/Colors";
 import { StackActions } from "@react-navigation/native";
 import Button from "../ui/Button";
 import { useAppSelector } from "../store/redux/hooks";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { CartItem } from "../types/types";
 
-export default function CartScreen() {
+export default function CartScreen({route}: any) {
+
   //retrieving cart data from the store
   const cartData = useAppSelector((state) => state.cart);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <CartList cartItems={cartData.cartItems} />
       <View style={{ marginHorizontal: 8, marginVertical: 16 }}>
         <View
@@ -42,7 +44,7 @@ export default function CartScreen() {
           {`Checkout - £${cartData.totalAmount > 0 ? cartData.totalAmount : 0}`}
         </Button>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

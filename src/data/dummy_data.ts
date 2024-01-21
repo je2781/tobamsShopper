@@ -6,17 +6,16 @@ export const displayedItems = [
     30,
     "African Doughnut Mix",
     require("../assets/images/doughnut.png"),
-    false,
     "Rare eat puff puff mix can be made into a deep fried dough. They are made from yeast dough, shaped into balls and deep-fried until golden brown. It has a doughnut like texture but slightly rough around the edges",
     {
-      Ingredients:
+      "Ingredients":
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 
       "Nutritional Information": "",
       "Dietary Information": "",
       "Storage Information": "",
       "How To Prepare": "",
-      Extra: "",
+      "Extra": "",
     }
   ),
   new Item(
@@ -24,15 +23,14 @@ export const displayedItems = [
     30,
     "Efo Riro",
     require("../assets/images/efo_riro.png"),
-    false,
     "Choose your blend of vegetabled to make this delicacy",
     {
-      Ingredients: "",
+      "Ingredients": "",
       "Nutritional Information": "",
       "Dietary Information": "",
       "Storage Information": "",
       "How To Prepare": "",
-      Extra: "",
+      "Extra": "",
     }
   ),
   new Item(
@@ -40,15 +38,14 @@ export const displayedItems = [
     30,
     "Asaro (Yam Powder)",
     require("../assets/images/asaro.png"),
-    false,
     "Good dough for bringing the family together",
     {
-      Ingredients: "",
+      "Ingredients": "",
       "Nutritional Information": "",
       "Dietary Information": "",
       "Storage Information": "",
       "How To Prepare": "",
-      Extra: "",
+      "Extra": "",
     }
   ),
   new Item(
@@ -56,15 +53,14 @@ export const displayedItems = [
     30,
     "Chicken Stew",
     require("../assets/images/chicken_stew.png"),
-    false,
     "Can be eayed with rice and other assortments",
     {
-      Ingredients: "",
+      "Ingredients": "",
       "Nutritional Information": "",
       "Dietary Information": "",
       "Storage Information": "",
       "How To Prepare": "",
-      Extra: "",
+      "Extra": "",
     }
   ),
   new Item(
@@ -72,15 +68,14 @@ export const displayedItems = [
     30,
     "Asaro (Yam Powder)",
     require("../assets/images/asaro.png"),
-    false,
     "Good dough for bringing the family together",
     {
-      Ingredients: "",
+      "Ingredients": "",
       "Nutritional Information": "",
       "Dietary Information": "",
       "Storage Information": "",
       "How To Prepare": "",
-      Extra: "",
+      "Extra": "",
     }
   ),
   new Item(
@@ -88,15 +83,14 @@ export const displayedItems = [
     30,
     "Asaro (Yam Powder)",
     require("../assets/images/asaro.png"),
-    false,
     "Good dough for bringing the family together",
     {
-      Ingredients: "",
+      "Ingredients": "",
       "Nutritional Information": "",
       "Dietary Information": "",
       "Storage Information": "",
       "How To Prepare": "",
-      Extra: "",
+      "Extra": "",
     }
   ),
   new Item(
@@ -104,15 +98,14 @@ export const displayedItems = [
     30,
     "Asaro (Yam Powder)",
     require("../assets/images/asaro.png"),
-    false,
     "Good dough for bringing the family together",
     {
-      Ingredients: "",
+      "Ingredients": "",
       "Nutritional Information": "",
       "Dietary Information": "",
       "Storage Information": "",
       "How To Prepare": "",
-      Extra: "",
+      "Extra": "",
     }
   ),
   new Item(
@@ -120,15 +113,14 @@ export const displayedItems = [
     30,
     "Asaro (Yam Powder)",
     require("../assets/images/asaro.png"),
-    false,
     "Good dough for bringing the family together",
     {
-      Ingredients: "",
+      "Ingredients": "",
       "Nutritional Information": "",
       "Dietary Information": "",
       "Storage Information": "",
       "How To Prepare": "",
-      Extra: "",
+      "Extra": "",
     }
   ),
 ];

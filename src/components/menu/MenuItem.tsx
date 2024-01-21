@@ -10,33 +10,34 @@ import {
 import { StackActions, useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { menuItemProps } from "../../types/types";
 import Colors from "../../constants/Colors";
 import Button from "../../ui/Button";
-import { useAppDispatch } from "../../store/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/redux/hooks";
 import cartActions from "../../store/redux/cart-slice";
+import favoriteActions from "../../store/redux/favorites-slice";
 
 //using memo to prevent reredending of menu item when you scroll through the list
 const MenuItem = memo(function MenuItem({
   title,
   imageUri,
   price,
-  isFavorite,
   id,
   info,
   description,
 }: menuItemProps) {
   const { width } = useWindowDimensions();
-  //dispatching action to toggle screen to Cart screen
   const dispatch = useAppDispatch();
-  //dispatching action to toggle screen to detail screen
   const navigation = useNavigation();
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
   function pressHandler() {
+    //dispatching action to push detail screen onto current stack
+
     navigation.dispatch(
       StackActions.push("detail", {
-        product: { title, price, id, imageUri, isFavorite, description, info },
+        product: { title, price, id, imageUri, description, info }
       })
     );
   }
@@ -51,6 +52,23 @@ const MenuItem = memo(function MenuItem({
     );
   }
 
+  function toggleFavorites(state: string) {
+    //updating local state to re-render UI
+    setIsFavorite((prevState) => !prevState);
+
+    switch (state) {
+      case "remove":
+        //dispatching action to update favorites data
+        dispatch(favoriteActions.removeFavorite({ id }));
+        break;
+
+      default:
+        //dispatching action to update favorites data
+        dispatch(favoriteActions.addFavorite({ id }));
+        break;
+    }
+  }
+
   return (
     <View style={styles.menuItem}>
       <Pressable
@@ -59,11 +77,21 @@ const MenuItem = memo(function MenuItem({
       >
         <View style={styles.innerContainer}>
           <View style={styles.favoritestyle}>
-            <MaterialIcons
-              name="favorite-border"
-              size={32}
-              color={Colors.primary300}
-            />
+            {isFavorite ? (
+              <MaterialIcons
+                name="favorite"
+                size={32}
+                color={Colors.primary300}
+                onPress={toggleFavorites.bind(null, "remove")}
+              />
+            ) : (
+              <MaterialIcons
+                name="favorite-border"
+                size={32}
+                color={Colors.primary300}
+                onPress={toggleFavorites.bind(null, "add")}
+              />
+            )}
           </View>
           <View style={{ alignItems: "center", justifyContent: "center" }}>
             <Image source={imageUri} style={styles.image} />

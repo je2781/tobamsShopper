@@ -46,18 +46,18 @@ export default function ProductDetailScreen({
   function AddToCart() {
     //dispatching action to update cart data in the store
 
-    dispatch(
-      cartActions.addItem({
-        item: {
-          title,
-          price,
-          id,
-          imageUri,
-          amount: tally * price!,
-          quantity: tally,
-        },
-      })
-    );
+    // dispatch(
+    //   cartActions.addItem({
+    //     item: {
+    //       title,
+    //       price,
+    //       id,
+    //       imageUri,
+    //       amount: tally * price!,
+    //       quantity: tally,
+    //     },
+    //   })
+    // );
   }
 
   function updateTally(mode: string) {
@@ -70,7 +70,7 @@ export default function ProductDetailScreen({
 
   const scrollX = React.useRef(new Animated.Value(0)).current;
   return (
-    <SafeAreaView style={styles.innerContainer}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.actionButton}>
         <Ionicons
           name="chevron-back"
@@ -132,7 +132,7 @@ export default function ProductDetailScreen({
             </View>
             {Object.keys(selectedProduct.info).map((title, i) => (
               <Accordion
-                key={title}
+                key={i}
                 title={title}
                 content={selectedProduct.info[title]}
               />
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     maxWidth: "15%",
   },
-  innerContainer: {
+  container: {
     flex: 1,
   },
 });

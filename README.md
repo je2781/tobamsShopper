@@ -10,7 +10,7 @@ tobamsShopper
 =========
 
 ## development
-I started with designing the model for the dummy data to follow OOP principles, and moved onto the UI components, as it gives flexibility for new UI features. The screens were next, along with their supporting sdks. 
+I started with designing the model for the dummy data, and other types/interfaces, to follow OOP principles, and moved onto the UI components, as it gives flexibility for new UI features. The screens were next, along with their supporting sdks. 
 
 ## How to run the app
 

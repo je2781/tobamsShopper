@@ -15,7 +15,6 @@ export default function MenuList() {
     const menuItemProps = {
       imageUri: item.imageUri,
       title: item.title,
-      isFavorite: item.isFavorite,
       description: item.description,
       price: item.price,
       info: item.info,

@@ -4,10 +4,7 @@ import Colors from "../constants/Colors";
 import { FlatList, StyleSheet, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MenuList from "../components/menu/MenuList";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ProductDetailScreen from "./ProductDetailScreen";
-import MenuSearchAndList from "../components/menu/MenuSearchAndList";
-import CartScreen from "./CartScreen";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
 export default function MenuScreen() {
@@ -17,7 +14,7 @@ export default function MenuScreen() {
     setEnteredQuery(enteredValue);
   }
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Input
         onUpdateValue={updateInputValueHandler}
         value={enteredQuery}
@@ -27,7 +24,7 @@ export default function MenuScreen() {
         placeholderColor={Colors.primary200}
       />
       <MenuList />
-    </View>
+    </SafeAreaView>
   );
 }
 

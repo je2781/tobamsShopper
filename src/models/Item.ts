@@ -5,7 +5,6 @@ class Item {
     title: string;
     imageUri: any;
     price: number;
-    isFavorite: boolean;
     description: string;
     info?: ProductInfo
 
@@ -15,14 +14,12 @@ class Item {
       price: number,
       title: string,
       imageUri: any,
-      isFavorite: boolean,
       description: string,
       info?: ProductInfo
     ) {
       this.id = id;
       this.title = title;
       this.imageUri = imageUri;
-      this.isFavorite = isFavorite;
       this.price = price;
       this.description = description;
       this.info = info

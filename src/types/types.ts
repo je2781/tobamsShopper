@@ -2,7 +2,6 @@ export interface menuItemProps {
   title?: string;
   imageUri?: any;
   price?: number;
-  isFavorite?: boolean;
   id?: string;
   route?: any;
   navigation?: any;
@@ -10,16 +9,6 @@ export interface menuItemProps {
   info?: ProductInfo;
 }
 
-export type FavoritesContextType = {
-  ids: string[];
-  addFavorite: (id: string) => void;
-  removeFavorite: (id: string) => void;
-};
-
-export type GeneralContextType = {
-  toggleScreen: () => void;
-  isProductDetail: boolean;
-};
 
 export type ProductInfo = Record<
   | "Ingredients"
@@ -30,6 +19,7 @@ export type ProductInfo = Record<
   | "Extra",
   string
 >;
+
 
 export type CartItem = {
   id: string;

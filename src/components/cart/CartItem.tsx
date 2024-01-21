@@ -11,18 +11,17 @@ export default function CartItemComponent({
   imageUri,
   title,
   price,
-  amount,
   quantity,
   id,
 }: CartItem) {
   //defining local state to determine how many items that will be added to the cart
-  const [tally, setTally] = useState<number>(1);
+  const [tally, setTally] = useState<number>(quantity);
   const dispatch = useAppDispatch();
   const cartData = useAppSelector((state) => state.cart);
 
   function checkOut() {}
 
-  function UpdateCart(mode: string, itemQuantity: number) {
+  function UpdateCart(mode: string) {
     //dispatching action to update cart data in the store
     switch (mode) {
       case "add":
@@ -33,10 +32,8 @@ export default function CartItemComponent({
               price,
               id,
               imageUri,
-              amount: tally * price!,
               quantity: tally,
-            },
-            quantity: itemQuantity
+            }
           })
         );
         break;
@@ -50,10 +47,8 @@ export default function CartItemComponent({
               price,
               id,
               imageUri,
-              amount: tally * price!,
               quantity: tally,
             },
-            quantity: itemQuantity
 
           })
         );
@@ -65,10 +60,10 @@ export default function CartItemComponent({
   function updateTally(mode: string) {
     if (mode === "minus" && tally > 0) {
       setTally((prevTally) => prevTally - 1);
-      UpdateCart(mode, tally);
+      UpdateCart(mode);
     } else if (mode === "add" && tally > 0) {
       setTally((prevTally) => prevTally + 1);
-      UpdateCart(mode, tally);
+      UpdateCart(mode);
     }
   }
   return (

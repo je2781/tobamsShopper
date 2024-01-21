@@ -8,7 +8,7 @@ import { useAppSelector } from "../store/redux/hooks";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CartItem } from "../types/types";
 
-export default function CartScreen({route}: any) {
+export default function CartScreen() {
 
   //retrieving cart data from the store
   const cartData = useAppSelector((state) => state.cart);

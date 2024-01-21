@@ -23,7 +23,6 @@ export type ProductInfo = Record<
 
 export type CartItem = {
   id: string;
-  amount: number;
   price: number;
   imageUri: any;
   title: string;

@@ -24,8 +24,7 @@ export const cartSlice = createSlice({
       if (existingCartItem) {
         const updatedCartItem = {
           ...existingCartItem,
-          amount: existingCartItem.amount + action.payload.item.price,
-          quantity: existingCartItem.quantity + action.payload.quantity
+          quantity: existingCartItem.quantity + action.payload.item.quantity
         };
         //updating item
         state.cartItems[existingCartItemIndex] = updatedCartItem;
@@ -47,8 +46,7 @@ export const cartSlice = createSlice({
       }else {
         const updatedCartItem = {
           ...existingCartItem,
-          amount: existingCartItem.amount - action.payload.item.price,
-          quantity: existingCartItem.quantity - action.payload.quantity
+          quantity: existingCartItem.quantity - action.payload.item.quantity
         };
         //updating item
         state.cartItems[existingCartItemIndex] = updatedCartItem;

@@ -20,7 +20,6 @@ export default function CartList({cartItems }: cartListProps) {
       imageUri: item.imageUri,
       title: item.title,
       price: item.price,
-      amount: item.amount,
       quantity: item.quantity,
       id: item.id,
     };

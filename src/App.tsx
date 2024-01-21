@@ -23,12 +23,13 @@ import { Provider } from "react-redux";
 import store from "./store/redux/index";
 import { CartItem } from "./types/types";
 
+//setting up stack navigator
 const Tab = createBottomTabNavigator();
-//setting up stack navigator to push the detail screen onto the menu screen
+//setting up stack navigator to nest the bottom tab
 const Stack = createNativeStackNavigator();
 
 function Root() {
-
+  // coverting the tab navigator into a component in order to nest it
   function TabNavigator() {
     return (
       <Tab.Navigator

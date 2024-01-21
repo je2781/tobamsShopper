@@ -87,7 +87,7 @@ export default function ProductDetailScreen({
       setTally((prevTally) => prevTally - 1);
     }
   }
-
+  //using ref to keep track of translation
   const scrollX = React.useRef(new Animated.Value(0)).current;
   return (
     <SafeAreaView style={styles.container}>

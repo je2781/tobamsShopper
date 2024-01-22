@@ -31,9 +31,6 @@ export default function MenuList() {
         keyExtractor={(item) => item.id}
         key={width > 560 ? "h" : "v"}
         renderItem={renderMenuItem}
-        contentContainerStyle={{
-          justifyContent: "space-between",
-        }}
         numColumns={width < 450 ? 1 : 3}
       />
     </View>
